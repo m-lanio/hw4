@@ -4,9 +4,11 @@ class PlacesController < ApplicationController
     @places = Place.all
   end
 
-  def show
+  def show #Going to need an if staytement here that checks who made the post
     @place = Place.find_by({ "id" => params["id"] })
-    @posts = Post.where({ "place_id" => @place["id"] })
+    if @current_user
+      @posts = Post.where({ "place_id" => @place["id"], "user_id" => @current_user["id"] }) #User check needs to come. IF better used in HTML.
+    end
   end
 
   def new
