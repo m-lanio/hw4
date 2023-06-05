@@ -2,14 +2,27 @@
 
 <h2>My Posts</h2>
 <% if @current_user %>
-  <% for post in @posts %>
-    <h3><%= post["title"] %></h3>
-    <h4><%= post["posted_on"] %></h4>
-    <p><%= post["description"] %></p>
-  <% end %>
   <p>
     <a href="/posts/new?place_id=<%= @place["id"] %>">New Post</a>
   </p>
+  
+  <div class="container">
+    <div class="row">
+      <% @posts.each do |post| %>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card">
+            <h3><%= post["title"] %></h3>
+            <h4><%= post["posted_on"] %></h4>
+            <p><%= post["description"] %></p>
+
+            <% if post.uploaded_image.attached? %>
+              <img src="<%= url_for(post.uploaded_image) %>" class="img-fluid">
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
 <% end %>
 
 
