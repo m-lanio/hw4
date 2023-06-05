@@ -22,4 +22,7 @@ test:
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  adapter: postgresql
+  database: mlanio_places_production
+  username: mlanio_places
+  password: <%= ENV["MLANIO_PLACES_DATABASE_PASSWORD"] %>
